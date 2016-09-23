@@ -11,12 +11,12 @@ def make_pw_hash(name, pw, salt = None):
     h = hashlib.sha256(name + pw + salt).hexdigest()
     return '%s,%s' % (h, salt)
 
-def valid_pw(name, pw, h):
+def valid_pw(name, pw, h): #pull the salt out by splitting the string on commas
     salt = h.split(',')[1]
     return h == make_pw_hash(name, pw, salt)
 
 """ functions for hasing and checking cookie values """
-SECRET = 'czUv86iAN9GXA3MT'
+SECRET = 'czUv86iAN9GXA3MT' #normally store this in a separate file for protection
 def hash_str(s):
     return hmac.new(SECRET,s).hexdigest()
 
